@@ -29,7 +29,7 @@ class ArmEnv(object):
         # normalize features
         dist1 = [(self.goal['x'] - a1xy_[0]) / 400, (self.goal['y'] - a1xy_[1]) / 400]
         dist2 = [(self.goal['x'] - finger[0]) / 400, (self.goal['y'] - finger[1]) / 400]
-        r = -np.sqrt(0.01 * dist2[0] ** 2 + dist2[1] ** 2) # 考虑增加比重
+        r = -np.sqrt( dist2[0] ** 2 + dist2[1] ** 2) # 考虑增加比重
 
         # # done and reward
         # if self.goal['x'] - self.goal['l'] / 2 < finger[0] < self.goal['x'] + self.goal['l'] / 2:
