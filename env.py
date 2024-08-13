@@ -6,7 +6,7 @@ class ArmEnv(object):
     viewer = None
     dt = .1    # refresh rate
     action_bound = [-1, 1]
-    goal = {'x': 200-42.5, 'y': 200+39.23, 'l': 20}  # 40   210-42.5, 200+39.23
+    goal = {'x': 200-42.5, 'y': 200+39.23, 'l': 10}  # 40   210-42.5, 200+39.23
     state_dim = 9
     action_dim = 2
 
@@ -69,7 +69,7 @@ class ArmEnv(object):
         # print(f"l_max = {l_max}")
         theta = np.random.uniform(0, 2 * np.pi)  # 随机生成角度 θ
         r = l_max * np.sqrt(np.random.uniform(0, 1))  # 随机生成半径 r，使用 sqrt(random) 保证均匀分布
-        #是否 reset goal in training     暂时不考虑
+        # 1. reset goal in training     暂时不考虑
         flag_reset_goal = 1
 
         if flag_reset_goal == 1:
@@ -81,6 +81,7 @@ class ArmEnv(object):
         # self.goal['x'] = 160 + np.random.rand() * 80.
         # self.goal['y'] = 160 + np.random.rand() * 80.
 
+        # 2. reset the init pose of arm in train
         self.arm_info['r'] = 2 * np.pi * np.random.rand(2)
         self.on_goal = 0
 

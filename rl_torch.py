@@ -11,6 +11,7 @@ GAMMA = 0.9  # reward discount
 TAU = 0.01  # soft replacement
 MEMORY_CAPACITY = 30000
 BATCH_SIZE = 32
+NN_num = 600
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -18,8 +19,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class Actor(nn.Module):
     def __init__(self, s_dim, a_dim, a_bound):
         super(Actor, self).__init__()
-        self.fc1 = nn.Linear(s_dim, 300)
-        self.fc2 = nn.Linear(300, a_dim)
+        self.fc1 = nn.Linear(s_dim, NN_num)
+        self.fc2 = nn.Linear(NN_num, a_dim)
         self.a_bound = a_bound
 
     def forward(self, s):
@@ -31,9 +32,9 @@ class Actor(nn.Module):
 class Critic(nn.Module):
     def __init__(self, s_dim, a_dim):
         super(Critic, self).__init__()
-        self.fc1 = nn.Linear(s_dim, 300)
-        self.fc2 = nn.Linear(a_dim, 300)
-        self.fc3 = nn.Linear(300, 1)
+        self.fc1 = nn.Linear(s_dim, NN_num)
+        self.fc2 = nn.Linear(a_dim, NN_num)
+        self.fc3 = nn.Linear(NN_num, 1)
 
     def forward(self, s, a):
         x = torch.relu(self.fc1(s) + self.fc2(a))
@@ -142,7 +143,7 @@ class DDPG(object):
         # latest_file_name = os.listdir(save_path)[-1]  # 获取最后一个文件名
         # file_path = os.path.join(save_path, latest_file_name)  # 使用传入的文件名
 
-        latest_file_name = "params_20240808_104914.pth"
+        latest_file_name = "params_20240813_142034.pth"      #   params_20240808_104914
         file_path = os.path.join(save_path, latest_file_name)  # 使用传入的文件名  params_20240807_194210
 
 

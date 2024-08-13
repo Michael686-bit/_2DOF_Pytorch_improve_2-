@@ -14,7 +14,7 @@ from env import ArmEnv
 # from rl import DDPG
 from rl_torch import DDPG
 
-MAX_EPISODES = 900
+MAX_EPISODES = 1800
 MAX_EP_STEPS = 300
 ON_TRAIN = 0 #True
 
@@ -128,7 +128,8 @@ def eval_p2p():
     # s = env.reset()
     s = env.reset_start()
     print(f"s = {s}")
-    env.set_goal(200-42.5 +5, 200+39.23 +8)  #[42.5 , 39.23]
+    # env.set_goal(200-42.5 +0, 200+39.23 +0)  #[42.5 , 39.23]
+    env.set_goal(200 -42.5 , 200-39.23 )
     done = 0
     done_4p = 0
     timer = 0
